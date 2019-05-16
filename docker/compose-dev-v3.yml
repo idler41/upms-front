@@ -1,0 +1,45 @@
+version: '3.5'
+
+services:
+    upms-front:
+        build: ../
+        image: idler41/upms-front-dev:1.0
+        container_name: upms-front-dev
+        hostname: upms-front
+        restart: always
+        expose:
+            - 80
+        volumes:
+            - type: volume
+              source: upms-front-logs
+              target: /var/log/nginx
+        networks:
+            net-dev:
+                aliases:
+                    - dev.upms-front.com
+
+    nginx-proxy:
+        build: ./proxy/
+        image: idler41/nginx-proxy:1.0
+        container_name: nginx-proxy
+        hostname: nginx-proxy
+        restart: always
+        ports:
+            - 8080:80
+        volumes:
+            - type: volume
+              source: nginx-proxy-logs
+              target: /var/log/nginx
+        networks:
+            net-dev:
+                aliases:
+                    - dev.proxy.com
+networks:
+    net-dev:
+        name: net-dev
+volumes:
+    upms-front-logs:
+        name: upms-front-logs
+
+    nginx-proxy-logs:
+        name: nginx-proxy-logs
