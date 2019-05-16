@@ -25,7 +25,7 @@ services:
         hostname: upms.proxy.com
         restart: always
         ports:
-            - 80:80
+            - 38080:80
         volumes:
             - type: volume
               source: nginx-proxy-logs
