@@ -2,7 +2,7 @@ version: '3.5'
 
 services:
     upms-front:
-        build: ./front/
+        build: ../
         image: idler41/upms-front:1.0
         container_name: upms-front
         hostname: upms-front
