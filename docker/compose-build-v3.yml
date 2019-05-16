@@ -14,7 +14,7 @@ services:
               source: upms-goaccess-html
               target: /usr/share/nginx/html/goaccess
         networks:
-            net-upms:
+            net-dev:
                 aliases:
                     - upms.front.com
 
@@ -31,7 +31,7 @@ services:
               source: nginx-proxy-logs
               target: /var/log/nginx
         networks:
-            net-upms:
+            net-dev:
                 aliases:
                     - upms.proxy.com
 
@@ -54,8 +54,8 @@ services:
               target: /srv/data
 
 networks:
-    net-upms:
-        name: net-upms
+    net-dev:
+        name: net-dev
 volumes:
     upms-goaccess-html:
         name: upms-goaccess-html
