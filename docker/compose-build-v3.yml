@@ -23,7 +23,7 @@ services:
               source: upms-server-logs
               target: /home/tomcat/apache-tomcat/logs
         networks:
-            net-upms:
+            net-dev:
                 aliases:
                     - upms.server.com
     upms-front:
