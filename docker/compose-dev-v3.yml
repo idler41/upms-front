@@ -22,7 +22,7 @@ services:
         build: ./proxy/
         image: idler41/nginx-proxy:1.0
         container_name: nginx-proxy
-        hostname: nginx-proxy
+        hostname: upms.proxy.com
         restart: always
         ports:
             - 80:80
