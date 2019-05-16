@@ -2,21 +2,38 @@ version: '3.5'
 
 services:
     upms-front:
-        build: ../
-        image: idler41/upms-front-dev:1.0
-        container_name: upms-front-dev
+        build: ./front/
+        image: idler41/upms-front:1.0
+        container_name: upms-front
         hostname: upms-front
         restart: always
         expose:
             - 80
         volumes:
             - type: volume
-              source: upms-front-logs
+              source: upms-goaccess-html
+              target: /usr/share/nginx/html/goaccess
+        networks:
+            net-upms:
+                aliases:
+                    - upms.front.com
+
+    nginx-proxy:
+        build: ./proxy/
+        image: idler41/nginx-proxy:1.0
+        container_name: nginx-proxy
+        hostname: nginx-proxy
+        restart: always
+        ports:
+            - 80:80
+        volumes:
+            - type: volume
+              source: nginx-proxy-logs
               target: /var/log/nginx
         networks:
-            net-dev:
+            net-upms:
                 aliases:
-                    - dev.upms-front.com
+                    - upms.proxy.com
 
     goaccess-upms:
         build: ./goaccess/
@@ -33,32 +50,16 @@ services:
               source: upms-goaccess-html
               target: /srv/report
             - type: volume
-              source: goaccess-upms-data
+              source: upms-goaccess-data
               target: /srv/data
 
-    nginx-proxy:
-        build: ./proxy/
-        image: idler41/nginx-proxy:1.0
-        container_name: nginx-proxy
-        hostname: nginx-proxy
-        restart: always
-        ports:
-            - 8080:80
-        volumes:
-            - type: volume
-              source: nginx-proxy-logs
-              target: /var/log/nginx
-        networks:
-            net-dev:
-                aliases:
-                    - dev.proxy.com
 networks:
-    net-dev:
-        name: net-dev
+    net-upms:
+        name: net-upms
 volumes:
     upms-goaccess-html:
         name: upms-goaccess-html
+    upms-goaccess-data:
+        name: upms-goaccess-data
     nginx-proxy-logs:
         name: nginx-proxy-logs
-    goaccess-upms-data:
-        name: goaccess-upms-data

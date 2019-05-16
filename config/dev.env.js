@@ -4,5 +4,5 @@ const prodEnv = require('./prod.env')
 
 module.exports = merge(prodEnv, {
   NODE_ENV: '"development"',
-  BASE_API: '"//dev.upms.com:9528/api/v1"'
+  BASE_API: '"//upms.proxy.com:9528/api/v1"'
 })
