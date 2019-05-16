@@ -2,7 +2,6 @@ version: '3.5'
 
 services:
     upms-server:
-        build: ./server/
         image: idler41/upms-server:1.0
         container_name: upms-server
         hostname: upms-server
