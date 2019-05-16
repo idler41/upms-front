@@ -1,6 +1,32 @@
 version: '3.5'
 
 services:
+    upms-server:
+        build: ./server/
+        image: idler41/upms-server:1.0
+        container_name: upms-server
+        hostname: upms-server
+        restart: always
+        environment:
+            HTTP_PORT: 8080
+            JAVA_OPTS: '-server
+                        -Xss512k
+                        -Xmx512M
+                        -XX:+UseConcMarkSweepGC
+                        -XX:+CMSParallelRemarkEnabled
+                        -XX:+HeapDumpOnOutOfMemoryError
+                        -XX:HeapDumpPath=/home/tomcat/apache-tomcat/logs'
+        expose:
+            - 8080
+            - 8005
+        volumes:
+            - type: volume
+              source: upms-server-logs
+              target: /home/tomcat/apache-tomcat/logs
+        networks:
+            net-upms:
+                aliases:
+                    - upms.server.com
     upms-front:
         build: ../
         image: idler41/upms-front:1.0
@@ -57,6 +83,8 @@ networks:
     net-dev:
         name: net-dev
 volumes:
+    upms-server-logs:
+        name: upms-server-logs
     upms-goaccess-html:
         name: upms-goaccess-html
     upms-goaccess-data:
