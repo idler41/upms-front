@@ -65,14 +65,3 @@ upms-front是upms系统的前端实现，基于vue-element-admin的二次开发�
 ## 推广
 
 Hi拼购，云主机低至199元/年<a href="https://www.aliyun.com/acts/hi-group-buying?userCode=fdg6btmo">https://promotion.aliyun.com/ntms/act/enterprise-discount.html?userCode=fdg6btmo</a>
-
-
-### 接私活
-
-本人6年Java后台开发经验，全天可接私活。
- 
-联系方式：
-
-- QQ：1025290315
-- 钉钉号：idler41
-- 邮箱： <a href="mailto:idler41@163.com">idler41@163.com</a>
